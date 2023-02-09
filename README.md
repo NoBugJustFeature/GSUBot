@@ -1,0 +1,3 @@
+# GSUBot
+
+Bot for GSU
