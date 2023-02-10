@@ -16,7 +16,7 @@ async def command_help(message: Message):
 async def command_help(message: Message, state=FSMContext):
     if document := message.document:
         await document.download(
-            destination_dir="data\pdf"
+            destination_dir=f"data\pdf\{message.document.file_name}"
         )
     await message.answer("Скачано!")
     await state.finish()
