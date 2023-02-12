@@ -1,0 +1,1 @@
+The system automatically deletes the file from this folder after updating the database
