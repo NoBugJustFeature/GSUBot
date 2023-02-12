@@ -1,9 +1,9 @@
 from loader import connection
 
-def get_date() -> list:
+def get_date() -> set:
     with connection.cursor() as cur:
         cur.execute("SELECT date FROM list")
-        return cur.fetchall()[0]
+        return set(cur.fetchall())
 
 
 
