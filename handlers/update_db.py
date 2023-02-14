@@ -10,6 +10,13 @@ from keyboards.admin_keyboards.keyboard_admin_panel import kb_admin
 from keyboards.cancel import kb_cancel
 
 
+@dp.message_handler(IsAdmin(), state=FSM_update_db.pdf_file, text="Отмена")
+async def command_help(message: Message, state=FSMContext):
+    await message.answer(f"Отменено", reply_markup=kb_admin)
+    await state.finish()
+
+
+
 @dp.message_handler(IsAdmin(), text="Обновить БД")
 async def command_help(message: Message):
     await FSM_update_db.pdf_file.set()
@@ -27,10 +34,4 @@ async def command_help(message: Message, state=FSMContext):
     await update_db(f"data\pdf\{document.file_name}")
 
     await message.answer("БД обновлена")
-    await state.finish()
-
-
-@dp.message_handler(IsAdmin(), state=FSM_update_db.pdf_file, text="Отмена")
-async def command_help(message: Message, state=FSMContext):
-    await message.answer(f"Отменено", reply_markup=kb_admin)
     await state.finish()
