@@ -9,13 +9,12 @@ async def get_data(message: Message):
             (name.upper(),)
         )
         if data:=cur.fetchall():
-            data = data[0]
+            for row in data:
+                name = row[0].title()
+                place = row[1]
+                subject = row[2]
+                date = row[3]
 
-            name = data[0].title()
-            place = data[1]
-            subject = data[2]
-            date = data[3]
-
-            await message.answer(f"{name}\nПредмет: {subject}\n{place}\nДата: {date}")
+                await message.answer(f"{name}\nПредмет: {subject}\n{place}\nДата: {date}")
         else:
             await message.answer(f"ФИО не найдено\n(списки обновляются вечером за день до экзамена)")

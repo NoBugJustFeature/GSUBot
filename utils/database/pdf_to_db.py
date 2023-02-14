@@ -41,10 +41,10 @@ async def update_db(path: str):
                         with connection.cursor() as cur:
                             cur.execute(
                                 """INSERT INTO list (name, place, subject, date) VALUES (%s, %s, %s, %s);""",
-                                (name,
-                                place,
-                                subject,
-                                date)
+                                (name.upper(),
+                                place.upper(),
+                                subject.upper(),
+                                date.upper())
                             )
 
     os.remove(path=path)

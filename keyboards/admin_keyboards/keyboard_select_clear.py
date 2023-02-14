@@ -8,6 +8,9 @@ kb_select_clear = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Очистить по дате"),
+        ],
+        [
+            KeyboardButton(text="Отмена")
         ]
     ],
     resize_keyboard=True,

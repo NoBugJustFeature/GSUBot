@@ -15,6 +15,6 @@ async def command_start(message: Message):
 @dp.message_handler(text="/start")
 async def command_start(message: Message):
     await message.answer(f"Привет!\n"
-                          "Напиши боту /testing и узнаешь где и когда у тебя РТ\n"
+                          "Напишите боту /testing и узнаете где и когда у вас РТ\n"
                           "(списки обновляются вечером за день до тестирования)",
                           reply_markup=kb_start)
