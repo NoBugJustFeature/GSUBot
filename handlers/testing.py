@@ -18,7 +18,7 @@ async def command_help(message: Message, state=FSMContext):
 @dp.message_handler(text=["/testing", "Тестирование"])
 async def command_start(message: Message):
     await FSM_testing.testing.set()
-    await message.answer(f"Напиши своё ФИО (Иванов Иван Иванович", reply_markup=kb_cancel)
+    await message.answer(f"Напиши своё ФИО \n(Иванов Иван Иванович)", reply_markup=kb_cancel)
 
 
 @dp.message_handler(state=FSM_testing.testing)

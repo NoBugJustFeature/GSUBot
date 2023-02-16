@@ -17,6 +17,16 @@ async def get_data(message: Message):
                 subject = row[2]
                 date = row[3]
 
+                number = " ".join(place.split()[0:2])
+
+                cur.execute(
+                    'SELECT * FROM address WHERE "Number" = (%s)',
+                    (number,)
+                )
+
+                cords = cur.fetchall()[0]
+
                 await message.answer(f"{name}\nПредмет: {subject}\n{place}\nДата: {date}", reply_markup=kb_start)
+                await bot.send_location(message.from_id, latitude=float(cords[1]), longitude=float(cords[2]))
         else:
             await message.answer(f"ФИО не найдено\n(списки обновляются вечером за день до экзамена)", reply_markup=kb_start)
