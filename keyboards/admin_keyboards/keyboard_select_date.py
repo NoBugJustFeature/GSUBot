@@ -1,5 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-from utils.database.kb_get_date import get_date
+from database.kb_get_date import get_date
 
 
 #for update keyboard

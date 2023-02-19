@@ -13,8 +13,8 @@ async def get_data(message: Message):
         if data:=cur.fetchall():
             for row in data:
                 name = row[0].title()
-                place = row[1]
-                subject = row[2]
+                place = row[1].title()
+                subject = row[2].title()
                 date = row[3]
 
                 number = " ".join(place.split()[0:2])

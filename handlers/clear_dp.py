@@ -10,8 +10,8 @@ from keyboards.admin_keyboards.keyboard_select_clear import kb_select_clear
 from keyboards.cancel import kb_cancel
 from keyboards.admin_keyboards.keyboard_select_date import update_date_list
 
-from utils.database.clear_all import clear_all_db
-from utils.database.clear_by_date import clear_by_date_db
+from database.clear_all import clear_all_db
+from database.clear_by_date import clear_by_date_db
 
 
 #cancel

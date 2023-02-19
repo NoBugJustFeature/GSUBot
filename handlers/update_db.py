@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 from loader import dp
 from filters import IsAdmin
 from FSM.state_update_db import FSM_update_db
-from utils.database.pdf_to_db import update_db
+from database.pdf_to_db import update_db
 
 from keyboards.admin_keyboards.keyboard_admin_panel import kb_admin
 from keyboards.cancel import kb_cancel
@@ -33,5 +33,5 @@ async def command_help(message: Message, state=FSMContext):
 
     await update_db(f"data\pdf\{document.file_name}")
 
-    await message.answer("БД обновлена")
+    await message.answer("БД обновлена", reply_markup=kb_admin)
     await state.finish()
