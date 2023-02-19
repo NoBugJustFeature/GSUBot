@@ -20,7 +20,7 @@ async def get_data(message: Message):
                 number = " ".join(place.split()[0:2])
 
                 cur.execute(
-                    'SELECT * FROM address WHERE "Number" = (%s)',
+                    'SELECT * FROM address WHERE "number" = (%s)',
                     (number,)
                 )
 
