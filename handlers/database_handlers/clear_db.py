@@ -11,7 +11,7 @@ from keyboards.admin_keyboards.keyboard_select_clear import kb_select_clear
 
 
 #cancel
-@dp.message_handler(state=[FSM_clear_db.select, FSM_clear_db.select_date, FSM_clear_db.select_all], text="Отмена")
+@dp.message_handler(text="Отмена")
 async def command_help(message: Message, state=FSMContext):
     await message.answer(f"Отменено", reply_markup=kb_admin)
     await state.finish()
