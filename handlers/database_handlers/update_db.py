@@ -6,13 +6,13 @@ from filters import IsAdmin
 from FSM.state_update_db import FSM_update_db
 from database.pdf_to_db import update_db
 
-from keyboards.admin_keyboards.keyboard_admin_panel import kb_admin
+from keyboards.admin_keyboards.keyboard_db import kb_db
 from keyboards.cancel import kb_cancel
 
 
 @dp.message_handler(IsAdmin(), state=FSM_update_db.pdf_file, text="Отмена")
 async def command_help(message: Message, state=FSMContext):
-    await message.answer(f"Отменено", reply_markup=kb_admin)
+    await message.answer(f"Отменено", reply_markup=kb_db)
     await state.finish()
 
 
@@ -33,5 +33,5 @@ async def command_help(message: Message, state=FSMContext):
 
     await update_db(f"data\pdf\{document.file_name}")
 
-    await message.answer("БД обновлена", reply_markup=kb_admin)
+    await message.answer("БД обновлена", reply_markup=kb_db)
     await state.finish()

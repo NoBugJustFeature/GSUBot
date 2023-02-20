@@ -6,7 +6,14 @@ from FSM.state_testing import FSM_testing
 from database.get_data import get_data
 
 from keyboards.cancel import kb_cancel
+from keyboards.admin_keyboards.keyboard_admin import kb_admin
 from keyboards.user_keyboards.keyboard_start import kb_start
+
+
+@dp.message_handler(state=FSM_testing.testing, text="Отмена")
+async def command_help(message: Message, state=FSMContext):
+    await message.answer(f"Отменено", reply_markup=kb_admin)
+    await state.finish()
     
 
 @dp.message_handler(state=FSM_testing.testing, text="Отмена")

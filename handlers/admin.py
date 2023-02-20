@@ -1,7 +1,7 @@
 from aiogram.types import Message
 from loader import dp
 
-from keyboards.admin_keyboards.keyboard_admin_panel import kb_admin
+from keyboards.admin_keyboards.keyboard_admin import kb_admin
 from filters import IsAdmin
 
 
