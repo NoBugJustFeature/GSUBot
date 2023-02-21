@@ -16,3 +16,6 @@ connection=connect(host=config.host,
                    database=config.database)
 
 connection.autocommit = True
+
+
+ban_time = 60

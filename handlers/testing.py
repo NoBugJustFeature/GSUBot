@@ -9,6 +9,9 @@ from keyboards.cancel import kb_cancel
 from keyboards.admin_keyboards.keyboard_admin import kb_admin
 from keyboards.user_keyboards.keyboard_start import kb_start
 
+from utils.misc import rate_limit
+from loader import ban_time
+
 
 @dp.message_handler(state=FSM_testing.testing, text="Отмена")
 async def command_help(message: Message, state=FSMContext):
@@ -22,6 +25,7 @@ async def command_help(message: Message, state=FSMContext):
     await state.finish()
 
 
+@rate_limit(limit=ban_time, key="/testing")
 @dp.message_handler(text=["/testing", "Тестирование"])
 async def command_start(message: Message):
     await FSM_testing.testing.set()

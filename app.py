@@ -5,11 +5,15 @@ import filters
 
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
+import middlewares
 
 async def on_startup(dp):
     filters.setup(dp)
-    await on_startup_notify(dp)
+    middlewares.setup(dp)
+
     await set_default_commands(dp)
+    await on_startup_notify(dp)
+    
     print("Бот запущен")
 
 
