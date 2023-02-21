@@ -6,6 +6,8 @@ from aiogram.dispatcher.handler import CancelHandler, current_handler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.exceptions import Throttled
 
+from loader import ban_time
+
 
 class ThrottlingMiddleware(BaseMiddleware):
     def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):
@@ -45,15 +47,12 @@ class ThrottlingMiddleware(BaseMiddleware):
         else:
             key = f"{self.prefix}_message"
 
-        # Calculate how many time is left till the block ends
-        delta = throttled.rate - throttled.delta
-
         # Prevent flooding
         if throttled.exceeded_count <= 2:
-            await message.reply(f'Слишком много запросов, вы заблокированы!\nПодождите {int(delta)} секунд для разблокировки')
+            await message.reply(f'Слишком много запросов, вы заблокированы!\nПодождите {ban_time} секунд для разблокировки')
 
         # Sleep.
-        await asyncio.sleep(delta)
+        await asyncio.sleep(ban_time)
 
         # Check lock status
         thr = await dispatcher.check_key(key)
