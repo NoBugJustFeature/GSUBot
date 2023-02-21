@@ -14,8 +14,11 @@ connection=connect(host=config.host,
                    user=config.user,
                    password=config.password,
                    database=config.database)
-
+                   
 connection.autocommit = True
 
-
+#time for antispam
+#minimal time between commands
+await_time = 10
+#time of ban for spam
 ban_time = 60

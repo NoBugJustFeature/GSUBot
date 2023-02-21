@@ -6,7 +6,7 @@ from keyboards.user_keyboards.keyboard_start import kb_start
 from keyboards.admin_keyboards.Keyboard_start_admin import kb_admin_start
 
 from utils.misc import rate_limit
-from loader import ban_time
+from loader import await_time
 
 
 @dp.message_handler(IsAdmin(), text="/start")
@@ -16,7 +16,7 @@ async def command_start(message: Message):
                           reply_markup=kb_admin_start)
     
 
-@rate_limit(limit=ban_time, key="/start")
+@rate_limit(limit=await_time, key="/start")
 @dp.message_handler(text="/start")
 async def command_start(message: Message):
     await message.answer(f"Привет!\n"
