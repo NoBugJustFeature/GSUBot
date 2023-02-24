@@ -19,18 +19,27 @@ async def cancel(message: Message, state=FSMContext):
 @dp.message_handler(IsAdmin(), text="Обновить БД")
 async def update_db(message: Message):
     await FSM_update_db.pdf_file.set()
+    print("норм")
     await message.answer("Отправьте pdf файл",reply_markup=kb_cancel)
+    print("норм2")
+
 
 
 @dp.message_handler(IsAdmin(), content_types=ContentTypes.DOCUMENT, state=FSM_update_db.pdf_file)
 async def update(message: Message, state=FSMContext):
+    print("норм3")
+
     if document := message.document:
         await document.download(
             destination_file=f"data\pdf\{document.file_name}"
         )
     await message.answer("Скачано!\nНачинаю обработку файла...")
+    print("норм4")
+
 
     await update_db(f"data\pdf\{document.file_name}")
+    print("нормааааааааааааааа")
+
 
     await message.answer("БД обновлена", reply_markup=kb_db)
     await state.finish()
