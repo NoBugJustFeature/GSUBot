@@ -22,3 +22,8 @@ connection.autocommit = True
 await_time = 10
 #time of ban for spam
 ban_time = 60
+
+#link for download file
+url = "http://old.gsu.by/dinamika/SpisokRT.pdf"
+#path for download file
+path = "data\pdf\SpisokRT.pdf"

@@ -6,7 +6,7 @@ from loader import dp
 from filters import IsAdmin
 from FSM.state_clear_db import FSM_clear_db
 
-from keyboards.admin_keyboards.keyboard_admin import kb_admin
+from keyboards.admin_keyboards.keyboard_db import kb_db
 from keyboards.cancel import kb_cancel
 from keyboards.admin_keyboards.keyboard_select_date import update_date_list
 
@@ -19,7 +19,7 @@ from random import randrange
 #cancel
 @dp.message_handler(state=[FSM_clear_db.select, FSM_clear_db.select_date, FSM_clear_db.confirm_date], text="Отмена")
 async def cancel(message: Message, state=FSMContext):
-    await message.answer(f"Отменено", reply_markup=kb_admin)
+    await message.answer(f"Отменено", reply_markup=kb_db)
     await state.finish()
 
 
@@ -50,7 +50,7 @@ async def confirm(message: Message, state=FSMContext):
 async def finish(message: Message, state=FSMContext):
     if key == str(message.text):
         await clear_by_date_db(date)
-        await message.answer(f"БД очищена по дате: {date}", reply_markup=kb_admin)
+        await message.answer(f"БД очищена по дате: {date}", reply_markup=kb_db)
+        await state.finish()
     else:
         await message.answer("Неверный код\nПовторите попытку", reply_markup=kb_cancel)
-    await state.finish()
