@@ -35,7 +35,7 @@ async def update_db(path: str):
                     place=row
 
                 else:
-                    name = " ".join(row.split().pop()) if 3 >= len(row.split()) <= 4 else ""
+                    name = " ".join(row.split().pop()) if len(row.split()) >= 3 else ""
                     if name:
                         #add data in database
                         with connection.cursor() as cur:
