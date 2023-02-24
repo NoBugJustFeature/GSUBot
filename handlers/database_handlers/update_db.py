@@ -11,20 +11,19 @@ from keyboards.cancel import kb_cancel
 
 
 @dp.message_handler(IsAdmin(), state=FSM_update_db.pdf_file, text="Отмена")
-async def command_help(message: Message, state=FSMContext):
+async def cancel(message: Message, state=FSMContext):
     await message.answer(f"Отменено", reply_markup=kb_db)
     await state.finish()
 
 
-
 @dp.message_handler(IsAdmin(), text="Обновить БД")
-async def command_help(message: Message):
+async def update_db(message: Message):
     await FSM_update_db.pdf_file.set()
     await message.answer("Отправьте pdf файл",reply_markup=kb_cancel)
 
 
 @dp.message_handler(IsAdmin(), content_types=ContentTypes.DOCUMENT, state=FSM_update_db.pdf_file)
-async def command_help(message: Message, state=FSMContext):
+async def update(message: Message, state=FSMContext):
     if document := message.document:
         await document.download(
             destination_file=f"data\pdf\{document.file_name}"

@@ -12,12 +12,12 @@ from keyboards.admin_keyboards.keyboard_select_clear import kb_select_clear
 
 #cancel
 @dp.message_handler(text="Отмена")
-async def command_help(message: Message, state=FSMContext):
+async def cancel(message: Message, state=FSMContext):
     await message.answer(f"Отменено", reply_markup=kb_admin)
     await state.finish()
 
 
 @dp.message_handler(IsAdmin(), text="Очистить БД")
-async def command_help(message: Message):
+async def choose(message: Message):
     await FSM_clear_db.select.set()
     await message.answer("Выберите способ", reply_markup=kb_select_clear)
