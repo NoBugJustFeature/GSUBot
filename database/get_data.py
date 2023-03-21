@@ -3,6 +3,8 @@ from loader import connection, bot
 
 from keyboards.user_keyboards.keyboard_start import kb_start
 
+from loader import url
+
 async def get_data(message: Message):
     name = message.text
     with connection.cursor() as cur:
@@ -30,3 +32,5 @@ async def get_data(message: Message):
                 await bot.send_location(message.from_id, latitude=float(cords[1]), longitude=float(cords[2]))
         else:
             await message.answer(f"ФИО не найдено\n(списки обновляются вечером за день до экзамена)", reply_markup=kb_start)
+            await message.answer(f"Возможно вы ввели неверные данные при регистрации\nПопробуйте найти себя в онлайн-списке\n{url}", reply_markup=kb_start)
+            
