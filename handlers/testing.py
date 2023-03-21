@@ -27,14 +27,30 @@ async def cancel(message: Message, state=FSMContext):
     await state.finish()
 
 
+@dp.message_handler(IsAdmin(), text=["/testing", "Тестирование"])
+async def command_testing(message: Message):
+    await FSM_testing.testing.set()
+    await message.answer(f"Напишите своё ФИО \n(Иванов Иван Иванович)", reply_markup=kb_cancel)
+
+
 @rate_limit(limit=await_time, key="/testing")
 @dp.message_handler(text=["/testing", "Тестирование"])
 async def command_testing(message: Message):
     await FSM_testing.testing.set()
     await message.answer(f"Напишите своё ФИО \n(Иванов Иван Иванович)", reply_markup=kb_cancel)
 
+    #for statistic
+    from loader import num_of_calls
+    num_of_calls.add()
+
+
+@dp.message_handler(IsAdmin(), state=FSM_testing.testing)
+async def output_data(message: Message, state=FSMContext):
+    await get_data(message, is_admin=True)
+    await state.finish()
+
 
 @dp.message_handler(state=FSM_testing.testing)
 async def output_data(message: Message, state=FSMContext):
-    await get_data(message)
+    await get_data(message, is_admin=False)
     await state.finish()

@@ -8,6 +8,9 @@ kb_admin = ReplyKeyboardMarkup(
         ],
         [
             KeyboardButton(text="Тестирование"),
+        ],
+        [
+            KeyboardButton(text="Колличество вызовов /testing"),
         ]
     ],
     resize_keyboard=True

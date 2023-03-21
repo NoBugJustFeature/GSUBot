@@ -27,3 +27,17 @@ ban_time = 60
 url = "http://old.gsu.by/dinamika/SpisokRT.pdf"
 #path for download file
 path = "data\pdf\SpisokRT.pdf"
+
+
+#for statistic
+class Counter:
+    def __init__(self):
+        self.__num = 0
+
+    def __str__(self):
+        return str(self.__num)
+
+    def add(self):
+        self.__num += 1
+
+num_of_calls = Counter()

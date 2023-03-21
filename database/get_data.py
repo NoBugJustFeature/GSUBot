@@ -2,10 +2,14 @@ from aiogram.types import Message
 from loader import connection, bot
 
 from keyboards.user_keyboards.keyboard_start import kb_start
+from keyboards.admin_keyboards.keyboard_admin import kb_admin
 
 from loader import url
 
-async def get_data(message: Message):
+async def get_data(message: Message, is_admin: bool):
+    
+    keyboard = kb_admin if is_admin else kb_start
+
     name = message.text
     with connection.cursor() as cur:
         cur.execute(
@@ -28,9 +32,9 @@ async def get_data(message: Message):
 
                 cords = cur.fetchall()[0]
 
-                await message.answer(f"{name}\nПредмет: {subject}\n{place}\nДата: {date}", reply_markup=kb_start)
+                await message.answer(f"{name}\nПредмет: {subject}\n{place}\nДата: {date}", reply_markup=keyboard)
                 await bot.send_location(message.from_id, latitude=float(cords[1]), longitude=float(cords[2]))
         else:
-            await message.answer(f"ФИО не найдено\n(списки обновляются вечером за день до экзамена)", reply_markup=kb_start)
-            await message.answer(f"Возможно вы ввели неверные данные при регистрации\nПопробуйте найти себя в онлайн-списке\n{url}", reply_markup=kb_start)
+            await message.answer(f"ФИО не найдено\n(списки обновляются вечером за день до экзамена)", reply_markup=keyboard)
+            await message.answer(f"Возможно вы ввели неверные данные при регистрации\nПопробуйте найти себя в онлайн-списке\n{url}", reply_markup=keyboard)
             
